@@ -17,7 +17,7 @@
 <meta property="og:description" content="1. 前言 距离1972年–prolog正式诞生之年–已经过去很久了。在那个产生了众多明星语言的年代，prolog 以其独特的魅力脱颖而出，在人工智能领域大放光彩。然而，随着符号主义的衰落，prolog 也逐渐跌落神坛，少有问津，但是它仍然是一门伟大的语言，它解决约束满足问题的能力依然十分耀眼，它在专家系统、人工智能领域以及 jvm 中仍发挥着重要的作用。下面就让我们来初步了解一下这门语言。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://foregotto.github.io/img/owl3.svg">
-<meta property="og:updated_time" content="2017-10-24T12:21:33.364Z">
+<meta property="og:updated_time" content="2017-10-24T15:05:25.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="prolog 初探">
 <meta name="twitter:description" content="1. 前言 距离1972年–prolog正式诞生之年–已经过去很久了。在那个产生了众多明星语言的年代，prolog 以其独特的魅力脱颖而出，在人工智能领域大放光彩。然而，随着符号主义的衰落，prolog 也逐渐跌落神坛，少有问津，但是它仍然是一门伟大的语言，它解决约束满足问题的能力依然十分耀眼，它在专家系统、人工智能领域以及 jvm 中仍发挥着重要的作用。下面就让我们来初步了解一下这门语言。">
@@ -167,44 +167,6 @@
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><blockquote>
 <p>距离1972年–prolog正式诞生之年–已经过去很久了。在那个产生了众多明星语言的年代，prolog 以其独特的魅力脱颖而出，在人工智能领域大放光彩。然而，随着符号主义的衰落，prolog 也逐渐跌落神坛，少有问津，但是它仍然是一门伟大的语言，它解决约束满足问题的能力依然十分耀眼，它在专家系统、人工智能领域以及 jvm 中仍发挥着重要的作用。下面就让我们来初步了解一下这门语言。<br><a id="more"></a></p>
 </blockquote>
-<!-- TOC depthFrom:2 -->
-<ul>
-<li><a href="#1-前言">1. 前言</a></li>
-<li><a href="#2-大纲">2. 大纲</a></li>
-<li><a href="#3-声明式的逻辑编程语言prolog">3. 声明式的逻辑编程语言，prolog</a><ul>
-<li><a href="#31-声明式">3.1. 声明式</a></li>
-<li><a href="#32-逻辑编程">3.2. 逻辑编程</a></li>
-<li><a href="#33-小结">3.3. 小结</a></li>
-</ul>
-</li>
-<li><a href="#4-prolog-程序的语法语义及基础设施">4. prolog 程序的语法、语义及基础设施</a><ul>
-<li><a href="#41-prolog-中的数据类型">4.1. prolog 中的数据类型</a></li>
-<li><a href="#42-prolog-中的语句仿函数">4.2. prolog 中的语句，仿函数</a></li>
-<li><a href="#43-prolog-程序的组织方式">4.3. prolog 程序的组织方式</a></li>
-<li><a href="#44-prolog-程序的语义">4.4. prolog 程序的语义</a></li>
-<li><a href="#45-prolog-程序的运行原理">4.5. prolog 程序的运行原理</a></li>
-<li><a href="#46-prolog-程序中常用的技巧递归">4.6. prolog 程序中常用的技巧，递归</a></li>
-<li><a href="#47-prolog-中的容器元组与列表">4.7. prolog 中的容器，元组与列表</a></li>
-<li><a href="#48-prolog-的内置规则">4.8. prolog 的内置规则</a></li>
-<li><a href="#49-小结">4.9. 小结</a></li>
-</ul>
-</li>
-<li><a href="#5-用-prolog-解决一些小问题">5. 用 prolog 解决一些小问题</a><ul>
-<li><a href="#51-简化版四色问题">5.1. 简化版四色问题</a></li>
-<li><a href="#52-常见面试题--列表翻转">5.2. 常见面试题–列表翻转</a></li>
-<li><a href="#53-人工智能入门题--狼羊白菜问题">5.3. 人工智能入门题–狼、羊、白菜问题</a></li>
-<li><a href="#54-小结">5.4. 小结</a></li>
-</ul>
-</li>
-<li><a href="#6-结尾">6. 结尾</a></li>
-<li><a href="#7-附录">7. 附录</a><ul>
-<li><a href="#71-swi-prolog-官方网站">7.1. swi-prolog 官方网站</a></li>
-<li><a href="#72-如何安装并运行-prolog">7.2. 如何安装并运行 prolog</a></li>
-<li><a href="#73-prolog-语言相关">7.3. prolog 语言相关</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
 <h2 id="2-大纲"><a href="#2-大纲" class="headerlink" title="2. 大纲"></a>2. 大纲</h2><p>prolog 有多种版本，本篇博客的结论基于 swi-prolog 7.2.3 64位版，操作系统是 Ubuntu 16.04 LTS 版。按照介绍一门编程语言的一般套路，这篇博客首先会介绍 prolog 的编程范式，接着说明 prolog 的一些基础设施，比如数据类型、程序的组织方式、运行原理、基本操作、容器、基本技巧，最后通过解决一些小问题来进一步说明 prolog 的特点。要想在一篇博客中完整地覆盖一门编程语言是不现实的，因此文中提供了一些链接以供读者作深入了解。如果想要系统的学习 prolog，还请阅读 <a href="http://www.learnprolognow.org/lpnpage.php?pageid=online" target="_blank" rel="external">swi-prolog官网推荐书籍</a> 或查看官网文档。<strong>由于篇幅有限，这篇文章的正文部分不会包含如何安装、启动和配置 prolog 等内容。如果你喜欢动手实践，请先阅读 <a href="#72-如何安装并运行-prolog">附录： 如何安装并运行 prolog</a>，它会指引你前进的方向。</strong></p>
 <h2 id="3-声明式的逻辑编程语言，prolog"><a href="#3-声明式的逻辑编程语言，prolog" class="headerlink" title="3. 声明式的逻辑编程语言，prolog"></a>3. 声明式的逻辑编程语言，prolog</h2><h3 id="3-1-声明式"><a href="#3-1-声明式" class="headerlink" title="3.1. 声明式"></a>3.1. 声明式</h3><p>与声明式相对应的编程范式是过程式。我们对过程式语言–比如 C 和 Java–已经很熟悉了。在过程式语言中，我们需要告诉计算机每一步应该怎么做。而在声明式语言中则不同，我们只需要告诉计算机我们想要什么，计算机就会把结果计算出来。声明式语言中使用最广泛的应该是 sql。在 sql 查询中，我们只需要描述自己想要什么样的结果，计算机就会从数据库中把结果找出来，在 prolog 中也是一样。比如，假设我们已经把如下的数据加载到内存中：<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">animal(cat).</div><div class="line">animal(dog).</div><div class="line">animal(fish).</div></pre></td></tr></table></figure></p>
 <p>输入如下查询：<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">?- animal(tomato).</div></pre></td></tr></table></figure></p>
@@ -493,6 +455,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-number">1.</span> <span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-大纲"><span class="toc-number">2.</span> <span class="toc-text">2. 大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-声明式的逻辑编程语言，prolog"><span class="toc-number">3.</span> <span class="toc-text">3. 声明式的逻辑编程语言，prolog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-声明式"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. 声明式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-逻辑编程"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. 逻辑编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-小结"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-prolog-程序的语法、语义及基础设施"><span class="toc-number">4.</span> <span class="toc-text">4. prolog 程序的语法、语义及基础设施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-prolog-中的数据类型"><span class="toc-number">4.1.</span> <span class="toc-text">4.1. prolog 中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-prolog-中的语句，仿函数"><span class="toc-number">4.2.</span> <span class="toc-text">4.2. prolog 中的语句，仿函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-prolog-程序的组织方式"><span class="toc-number">4.3.</span> <span class="toc-text">4.3. prolog 程序的组织方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-prolog-程序的语义"><span class="toc-number">4.4.</span> <span class="toc-text">4.4. prolog 程序的语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-prolog-程序的运行原理"><span class="toc-number">4.5.</span> <span class="toc-text">4.5. prolog 程序的运行原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-prolog-程序中常用的技巧，递归"><span class="toc-number">4.6.</span> <span class="toc-text">4.6. prolog 程序中常用的技巧，递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-prolog-中的容器，元组与列表"><span class="toc-number">4.7.</span> <span class="toc-text">4.7. prolog 中的容器，元组与列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-prolog-的内置规则"><span class="toc-number">4.8.</span> <span class="toc-text">4.8. prolog 的内置规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-小结"><span class="toc-number">4.9.</span> <span class="toc-text">4.9. 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-用-prolog-解决一些小问题"><span class="toc-number">5.</span> <span class="toc-text">5. 用 prolog 解决一些小问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-简化版四色问题"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 简化版四色问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-常见面试题–列表翻转"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 常见面试题–列表翻转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-人工智能入门题–狼、羊、白菜问题"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 人工智能入门题–狼、羊、白菜问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-小结"><span class="toc-number">5.4.</span> <span class="toc-text">5.4. 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-结尾"><span class="toc-number">6.</span> <span class="toc-text">6. 结尾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-附录"><span class="toc-number">7.</span> <span class="toc-text">7. 附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-swi-prolog-官方网站"><span class="toc-number">7.1.</span> <span class="toc-text">7.1. swi-prolog 官方网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-如何安装并运行-prolog"><span class="toc-number">7.2.</span> <span class="toc-text">7.2. 如何安装并运行 prolog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-prolog-语言相关"><span class="toc-number">7.3.</span> <span class="toc-text">7.3. prolog 语言相关</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
