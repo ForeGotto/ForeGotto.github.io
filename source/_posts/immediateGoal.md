@@ -14,7 +14,7 @@ tags: note
 - 学习 JAVA 并发编程
 - 学习 git attributes 配置
   - [相关博客](https://www.davidlaing.com/category/platforms/git/)
-- 阅读 sso 相关的论文及博客
+- 阅读 SSO 相关的论文及博客
 - 学习 sicp
   - 阅读一遍同时完成习题
   - 用 JAVA 完成习题
